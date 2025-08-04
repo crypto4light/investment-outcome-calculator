@@ -19,24 +19,29 @@
         .container {
             width: 100%;
             max-width: 600px;
-            padding: 10px;
+            padding: 5px;
             box-sizing: border-box;
+            max-height: 90vh; /* Обмеження висоти для уникнення скролінгу */
+            overflow: auto; /* Дозволяє скролінг лише за потреби */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         .calculator {
             background: #fff;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
             width: 100%;
         }
         .calculator h2 {
             text-align: center;
             margin-top: 0;
+            margin-bottom: 10px;
             color: #333;
         }
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         label {
             display: block;
@@ -45,18 +50,20 @@
         }
         input {
             width: 100%;
-            padding: 8px;
+            padding: 6px;
             box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 4px;
             background: #f9f9f9;
+            font-size: 14px;
         }
         .outcome {
-            margin-top: 20px;
+            margin-top: 15px;
         }
         .outcome div {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #333;
+            font-size: 14px;
         }
     </style>
 </head>
