@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Crypto4light Calculators</title>
     <style>
         body {
@@ -15,14 +15,15 @@
             align-items: center;
             min-height: 100vh;
             width: 100%;
+            overflow-x: hidden; /* Заборона горизонтального скролінгу на рівні body */
         }
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 580px; /* Зменшено для уникнення перевищення */
             padding: 5px;
             box-sizing: border-box;
-            max-height: 90vh; /* Обмеження висоти для уникнення скролінгу */
-            overflow: auto; /* Дозволяє скролінг лише за потреби */
+            max-height: 90vh;
+            overflow: auto; /* Вертикальний скролінг за потреби */
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -33,6 +34,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             width: 100%;
+            box-sizing: border-box;
         }
         .calculator h2 {
             text-align: center;
@@ -47,6 +49,7 @@
             display: block;
             margin-bottom: 5px;
             color: #666;
+            font-size: 14px;
         }
         input {
             width: 100%;
@@ -56,6 +59,7 @@
             border-radius: 4px;
             background: #f9f9f9;
             font-size: 14px;
+            max-width: 100%; /* Забезпечує, що не перевищує контейнер */
         }
         .outcome {
             margin-top: 15px;
