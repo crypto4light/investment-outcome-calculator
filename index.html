@@ -3,39 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investment Outcome Calculator</title>
+    <title>Crypto4light Calculators</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #1a1a2e; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .calculator { background: #16213e; padding: 20px; border-radius: 10px; width: 300px; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #4e5d94; border-radius: 4px; background: #0f3460; color: #fff; }
-        .outcome { margin-top: 20px; }
-        .outcome div { margin-bottom: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+        .calculator {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .calculator h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+        .outcome {
+            margin-top: 20px;
+        }
+        .outcome div {
+            margin-bottom: 10px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="input-group">
-            <label for="investment">Investment:</label>
-            <input type="number" id="investment" placeholder="0" min="0">
+    <div class="container">
+        <div class="calculator">
+            <h2>Market Cap Calculator</h2>
+            <div class="input-group">
+                <label for="totalSupply">Total Supply:</label>
+                <input type="number" id="totalSupply" placeholder="Enter total supply" min="0">
+            </div>
+            <div class="input-group">
+                <label for="pricePerCoin">Price per Coin:</label>
+                <input type="number" id="pricePerCoin" placeholder="Enter price per coin" min="0" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="marketCap">Market Cap:</label>
+                <input type="number" id="marketCap" placeholder="Market cap" readonly>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="buyPrice">Buy Price:</label>
-            <input type="number" id="buyPrice" placeholder="0" min="0" step="0.01">
-        </div>
-        <div class="input-group">
-            <label for="sellPrice">Sell Price:</label>
-            <input type="number" id="sellPrice" placeholder="0" min="0" step="0.01">
-        </div>
-        <div class="outcome">
-            <div>PROFIT/LOSS: $<span id="profitLoss">0.00</span></div>
-            <div>TOTAL INVESTMENT: $<span id="totalInvestment">0.00</span></div>
-            <div>TOTAL EXIT AMOUNT: $<span id="totalExit">0.00</span></div>
+
+        <div class="calculator">
+            <h2>Investment Outcome Calculator</h2>
+            <div class="input-group">
+                <label for="investment">Investment:</label>
+                <input type="number" id="investment" placeholder="0" min="0">
+            </div>
+            <div class="input-group">
+                <label for="buyPrice">Buy Price:</label>
+                <input type="number" id="buyPrice" placeholder="0" min="0" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="sellPrice">Sell Price:</label>
+                <input type="number" id="sellPrice" placeholder="0" min="0" step="0.01">
+            </div>
+            <div class="outcome">
+                <div>PROFIT/LOSS: $<span id="profitLoss">0.00</span></div>
+                <div>TOTAL INVESTMENT: $<span id="totalInvestment">0.00</span></div>
+                <div>TOTAL EXIT AMOUNT: $<span id="totalExit">0.00</span></div>
+            </div>
         </div>
     </div>
 
     <script>
+        // Market Cap Calculator
+        const totalSupply = document.getElementById('totalSupply');
+        const pricePerCoin = document.getElementById('pricePerCoin');
+        const marketCap = document.getElementById('marketCap');
+
+        [totalSupply, pricePerCoin].forEach(input => {
+            input.addEventListener('input', calculateMarketCap);
+        });
+
+        function calculateMarketCap() {
+            const supply = parseFloat(totalSupply.value) || 0;
+            const price = parseFloat(pricePerCoin.value) || 0;
+            const cap = supply * price;
+            marketCap.value = isNaN(cap) ? '' : cap.toFixed(2);
+        }
+
+        // Investment Outcome Calculator
         const investment = document.getElementById('investment');
         const buyPrice = document.getElementById('buyPrice');
         const sellPrice = document.getElementById('sellPrice');
